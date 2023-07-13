@@ -1,0 +1,14 @@
+"0","recomb_loci <- sort(sample( 1:100, size = 3, replace = FALSE))
+parent2_chrom[1:5]
+"
+"1","[1]"
+"1"," 1"
+"1"," 1"
+"1"," 1"
+"1"," 1"
+"1"," 1"
+"1","
+"
+"0","F1_a$CH1 <- c(parent1_chrom[1:recomb_loci[1]],)"
+"2","Error in c(parent1_chrom[1:recomb_loci[1]], ) : argument 2 is empty
+"
