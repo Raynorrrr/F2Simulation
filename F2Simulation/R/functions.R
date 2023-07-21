@@ -39,7 +39,7 @@ generating_mouse <- function(parent_chromosomes, num_recombinations = 3){
   recomb_loci <- sort(sample( 1:length(parent1_chrom), size = num_recombinations, replace = FALSE))
   
   ## Recombining loci by alternating b/w the parent's chromosome at the recombination loci
-  for(i in 1:num_recombinations+1){
+  for(i in 1:(num_recombinations+1)){
     if(i == 1){
       a_CH1 <- parent1_chrom[1:recomb_loci[i]]
       a_CH2 <- parent2_chrom[1:recomb_loci[i]]
@@ -86,6 +86,3 @@ generating_generation <- function(parent_chromosomes, num_recombinations = 3, nu
 
 # running QTL on simulated data
 
-
-con2<- file("temp.txt")
-open(con2)
