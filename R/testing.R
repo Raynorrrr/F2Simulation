@@ -1,4 +1,5 @@
-source("~/GitHub/F2Simulation/F2Simulation/R/testing.R")
+wd <- getwd()
+source(paste0(wd, "R/testing.R"))
 
 test_parents <- generating_parent(chromosome_length = 1000)
 
