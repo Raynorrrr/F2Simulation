@@ -39,29 +39,24 @@ generating_mouse <- function(parent_chromosomes, num_recombinations = 3){
   recomb_loci <- sort(sample( 1:length(parent1_chrom), size = num_recombinations, replace = FALSE))
   
   ## Recombining loci by alternating b/w the parent's chromosome at the recombination loci
-  for(i in 1:num_recombinations+1){
+  for(i in 1:(num_recombinations+1)){
     if(i == 1){
       a_CH1 <- parent1_chrom[1:recomb_loci[i]]
       a_CH2 <- parent2_chrom[1:recomb_loci[i]]
-      print(paste(i, length(a_CH1), "statement 1" ,sep = " / "))
     }else if(i == num_recombinations+1){ 
        if(i %% 2 != 0){
         a_CH1 <- append(x = a_CH1, values = parent1_chrom[(recomb_loci[i-1]+1):length(parent1_chrom)])
         a_CH2 <- append(x = a_CH2, values = parent2_chrom[(recomb_loci[i-1]+1):length(parent1_chrom)])
-        print(paste(i, length(a_CH1), "statement 2" , sep = " / "))
       }else if(i %% 2 == 0){
         a_CH1 <- append(x = a_CH1, values = parent2_chrom[(recomb_loci[i-1]+1):length(parent1_chrom)])
         a_CH2 <- append(x = a_CH2, values = parent1_chrom[(recomb_loci[i-1]+1):length(parent1_chrom)])
-        print(paste(i, length(a_CH1), "statement 3" , sep = " / "))
       }
     }else if(i %% 2 != 0){
       a_CH1 <- append(x = a_CH1, values = parent1_chrom[(recomb_loci[i-1]+1):recomb_loci[i]])
       a_CH2 <- append(x = a_CH2, values = parent2_chrom[(recomb_loci[i-1]+1):recomb_loci[i]])
-      print(paste(i, length(a_CH1),  "statement 4" ,sep = " / "))
     }else if(i %% 2 == 0){
       a_CH1 <- append(x = a_CH1, values = parent2_chrom[(recomb_loci[i-1]+1):recomb_loci[i]])
       a_CH2 <- append(x = a_CH2, values = parent1_chrom[(recomb_loci[i-1]+1):recomb_loci[i]])
-      print(paste(i, length(a_CH1), "statement 5" , sep = " / "))
     }# this is for the all other recombination chunks 
   }
   return(data.frame(CH1 = a_CH1, CH2 = a_CH2))
