@@ -81,6 +81,3 @@ generating_generation <- function(parent_chromosomes, num_recombinations = 3, nu
 
 # running QTL on simulated data
 
-
-con2<- file("temp.txt")
-open(con2)
