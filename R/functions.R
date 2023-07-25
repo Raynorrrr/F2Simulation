@@ -63,19 +63,62 @@ generating_mouse <- function(parent_chromosomes, num_recombinations = 3){
 }
 
 # function for simulating new generation from parents
-generating_generation <- function(parent_chromosomes, num_recombinations = 3, num_mice = 400, generation = c("F1","F2","F3")){
+generating_generation <- function(parent_chromosomes, num_recombinations = 3, 
+num_mice = 400, generation = c("F1","F2","F3")){
   generation <- generation[1]
-  for(i in num_mice){
+  for(i in 1:num_mice){
     name_mouse <- paste0(generation, ".", i)
-    if( i == 1){
-      population_list <- list(name_mouse = generating_mouse(parent_chromosomes = parent_chromosomes,num_recombinations = num_recombinations))
+    if(i == 1){
+      population_list <- list(generating_mouse(parent_chromosomes = parent_chromosomes,
+  num_recombinations = num_recombinations))
+      names(population_list)[1] <- name_mouse
+    }else{
+      population_list <- append(x= population_list, values= list(generating_mouse(parent_chromosomes = parent_chromosomes,
+  num_recombinations = num_recombinations)))
+      names(population_list)[i] <- name_mouse
     }  
+  }
+  return(population_list)
+}
+
+# visualization of one of the chromosomes
+chromo_fig <- function(chromosomes, colors = c("darkorange1","dodgerblue1") )
+  if(!require("ggplot2")){
+  install.packages("ggplot2")
+  }
+require("ggplot2")
+
+i <- sample(1:length(chromosomes), size = 1)
+chromo_to_plot <- as.data.frame(chromosomes[i])
+chromo_to_plot$loci - 1:now(chromo_to_plot)
+
+ch1.y <- 1
+ch2.y <-1
+
+plotting_data <- data.frame(xmin = numeric(), xmax = numeric(), ymin = numeric(), 
+  ymax = numeric(), fill = character())
+
+for(i in 1:(nrow(chromo_to_plot)-1)){
+  if(chromo_to_plot[i,1] == chromo_to_plot[i+1,1]){
+    next
+  }else{
+    plotting_data <- append(plotting_data, c(xmin = 0, xmax = 1, ymin = 0, ymax = chromo_to_plot[i, 3], 
+      fill = "darkorange1"))
+    
+    
+    ch1.y <- append(ch1.y, chromo_to_plot[i,3])
+    ch1.y <- append(ch1.y, chromo_to_plot[i+1,3])
+  }
+  
+  if(chromo_to_plot[2,i] == chromo_to_plot[i+1, 2]){
+    next
+  }else{
+    ch2.y <- append(ch2.y, chromo_to_plot[i,3])
+    ch2.y <- append(ch2.y, chromo_to_plot[i+``,3])
   }
 }
 
-# visualization of one of the "chromosomes
-
-
+plot <- ggpot(data = x)
 # simulating phenotype 
 
 
